@@ -22,7 +22,7 @@ app.post("/ask", async (req, res) => {
     const userMessage = req.body.message;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
+      model: "gpt-4",
       messages: [
         { role: "system", content: "Tu es CONSEILLER PÉDAGOGIQUE INÉA. Tu poses les questions du questionnaire pour recommander une formation INÉA adaptée." },
         { role: "user", content: userMessage }
