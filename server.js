@@ -1,24 +1,21 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const { OpenAI } = require("openai");
-require("dotenv").config();console.log("TEST CLE API :", process.env.OPENAI_API_KEY);
-
-
-
+require("dotenv").config();
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
+app.use(bodyParser.json());
+
+
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-app.use(bodyParser.json());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
 
 app.post("/ask", async (req, res) => {
   try {
@@ -42,4 +39,5 @@ app.post("/ask", async (req, res) => {
 app.listen(port, () => {
   console.log(`Assistant INÉA prêt sur http://localhost:${port}`);
 });
+
 
